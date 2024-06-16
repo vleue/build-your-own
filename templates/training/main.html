@@ -1,0 +1,21 @@
+<html>
+
+<body>
+    hello
+    {{section.title}}
+    <br />
+    {% for subsection in section.subsections %}
+    {% set subsection = get_section(path=subsection) %}
+    {{ subsection.title}}
+    <br />
+    <ul>
+        {% for page in subsection.pages %}
+        <li>{{ page.title }}</li>
+        {% endfor %}
+    </ul>
+    <hr />
+    {% endfor %}
+
+</body>
+
+</html>

@@ -7,3 +7,4 @@ npm run build
 cd ..
 cp -r graph-ui/dist/index.html public/training/index.html
 cp -r graph-ui/dist/_next public/_next
+sed -i 's/\/_next/\/build-your-own\/_next/g' public/training/index.html

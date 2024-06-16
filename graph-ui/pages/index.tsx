@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const proOptions = { hideAttribution: true };
 
-{% raw %}
+
 
 export default function Home() {
 return (
@@ -17,7 +17,7 @@ return (
 </div>
 );
 }
-{% endraw %}
+
 
 import { useCallback } from 'react';
 import ReactFlow, {
@@ -35,27 +35,79 @@ import 'reactflow/dist/style.css';
 
 const initialNodes: Node[] = [
 
-{% for subsection in section.subsections %}
-{% set subsection = get_section(path=subsection) %}
-{% set parent_index = loop.index %}
+
+
+
 
 {
-id: '{{parent_index}}',
-data: { label: '{{subsection.title}}' },
-position: { x: {{loop.index0 * 250 + 50}}, y: 100 },
+id: '1',
+data: { label: 'Building and Deploying' },
+position: { x: 50, y: 100 },
 className: 'light',
-style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 200, height: {{subsection.pages | length * 10 + 50}} },
+style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 200, height: 120 },
 },
-{% for page in subsection.pages %}
+
 
 {
-id: '{{parent_index}}-{{loop.index}}',
-data: { label: '{{page.title}}' },
-position: { x: 20, y: {{loop.index0 * 50 + 50}} },
-parentId: '{{parent_index}}',
+id: '1-1',
+data: { label: 'windows' },
+position: { x: 20, y: 50 },
+parentId: '1',
 },
-{% endfor %}
-{% endfor %}
+
+
+{
+id: '1-2',
+data: { label: 'macos' },
+position: { x: 20, y: 100 },
+parentId: '1',
+},
+
+
+
+
+
+{
+id: '2',
+data: { label: 'Learning Rust' },
+position: { x: 300, y: 100 },
+className: 'light',
+style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 200, height: 240 },
+},
+
+
+{
+id: '2-1',
+data: { label: 'starter' },
+position: { x: 20, y: 50 },
+parentId: '2',
+},
+
+
+{
+id: '2-2',
+data: { label: 'tests' },
+position: { x: 20, y: 100 },
+parentId: '2',
+},
+
+
+{
+id: '2-3',
+data: { label: 'next' },
+position: { x: 20, y: 150 },
+parentId: '2',
+},
+
+
+{
+id: '2-4',
+data: { label: 'benchmarks' },
+position: { x: 20, y: 200 },
+parentId: '2',
+},
+
+
 ];
 
 const initialEdges: Edge[] = [

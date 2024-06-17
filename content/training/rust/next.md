@@ -1,7 +1,7 @@
 +++
-title = "next"
+title = "Going Further"
 weight = 1
 
 [extra]
-dependencies = ["/training/rust/starter/"]
+dependencies = ["/training/rust/first-steps/"]
 +++

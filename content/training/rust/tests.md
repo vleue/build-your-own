@@ -1,5 +1,5 @@
 +++
-title = "tests"
+title = "Tests"
 weight = 2
 
 [extra]

@@ -1,5 +1,5 @@
 +++
-title = "benchmarks"
+title = "Benchmarks"
 weight = 3
 
 [extra]

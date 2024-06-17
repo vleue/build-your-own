@@ -1,4 +1,4 @@
-import { Node } from 'reactflow';
+import { Node, Edge } from 'reactflow';
 
 const content: Node[] = [
 {% for subsection in section.subsections -%}
@@ -26,4 +26,31 @@ draggable: false,
 {% endfor -%}
 ];
 
-export default content;
+
+const dependencies: Edge[] = [
+{% for subsection in section.subsections -%}
+{% set subsection = get_section(path=subsection) -%}
+{% set parent_index = loop.index -%}
+{% for page in subsection.pages -%}
+{% set page_index = loop.index -%}
+{% set page_id = parent_index ~ "-" ~ page_index -%}
+{% if page.extra.dependencies -%}
+{% for dependency in page.extra.dependencies -%}
+{% for subsection in section.subsections -%}
+{% set subsection = get_section(path=subsection) -%}
+{% set parent_index = loop.index -%}
+{% for page in subsection.pages -%}
+{% set page_index = loop.index -%}
+{% if dependency == page.path -%}
+{% set dependency_id = parent_index ~ "-" ~ page_index -%}
+{ id: '{{page_id}}-{{dependency_id}}', target: '{{page_id}}', source: '{{dependency_id}}' },
+{% endif -%}
+{% endfor -%}
+{% endfor -%}
+{% endfor -%}
+{% endif -%}
+{% endfor -%}
+{% endfor -%}
+];
+
+export default { content, dependencies };

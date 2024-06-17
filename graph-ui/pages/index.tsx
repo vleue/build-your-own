@@ -30,21 +30,13 @@ import ReactFlow, {
     Connection,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import content from "../generated/nodes";
+// import { content, dependencies } from "../generated/nodes";
 
-const initialEdges: Edge[] = [
-    // { id: 'e1-2', source: '1', target: '2', animated: true },
-    // { id: 'e1-3', source: '1', target: '3' },
-    // { id: 'e2a-4a', source: '2a', target: '4a' },
-    // { id: 'e3-4b', source: '3', target: '4b' },
-    // { id: 'e4a-4b1', source: '4a', target: '4b1' },
-    // { id: 'e4a-4b2', source: '4a', target: '4b2' },
-    // { id: 'e4b1-4b2', source: '4b1', target: '4b2' },
-];
+import generated from '../generated/nodes';
 
 const NestedFlow = () => {
-    const [nodes, setNodes, onNodesChange] = useNodesState(content);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    const [nodes, setNodes, onNodesChange] = useNodesState(generated.content);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(generated.dependencies);
 
     const onConnect = useCallback((connection: Edge | Connection) => {
         setEdges((eds) => addEdge(connection, eds));

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 zola build
-mkdir graph-ui/pages || true
-cp public/training/index.html graph-ui/pages/index.tsx
+mkdir graph-ui/generated || true
+cp public/training/index.html graph-ui/generated/nodes.ts
 cd graph-ui
 npm run build
 cd ..

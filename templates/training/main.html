@@ -1,44 +1,10 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import 'reactflow/dist/style.css';
+import { Node } from 'reactflow';
 
-const inter = Inter({ subsets: ["latin"] });
-
-const proOptions = { hideAttribution: true };
-
-{% raw %}
-
-export default function Home() {
-return (
-<div>
-    < div style={{ height: '100vh' , width: '100vw' } }>
-        <NestedFlow />
-</div>
-</div>
-);
-}
-{% endraw %}
-
-import { useCallback } from 'react';
-import ReactFlow, {
-addEdge,
-Background,
-useNodesState,
-useEdgesState,
-MiniMap,
-Controls,
-Node,
-Edge,
-Connection,
-} from 'reactflow';
-import 'reactflow/dist/style.css';
-
-const initialNodes: Node[] = [
-
-{% for subsection in section.subsections %}
-{% set subsection = get_section(path=subsection) %}
-{% set parent_index = loop.index %}
-{% set container_height = subsection.pages | length * 50 %}
+const content: Node[] = [
+{% for subsection in section.subsections -%}
+{% set subsection = get_section(path=subsection) -%}
+{% set parent_index = loop.index -%}
+{% set container_height = subsection.pages | length * 50 -%}
 {
 id: '{{parent_index}}',
 data: { label: '{{subsection.title}}' },
@@ -46,41 +12,15 @@ position: { x: {{loop.index0 * 250 + 50}}, y: 100 },
 className: 'light',
 style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 200, height: {{ container_height + 50 }}},
 },
-{% for page in subsection.pages %}
-
+{% for page in subsection.pages -%}
 {
 id: '{{parent_index}}-{{loop.index}}',
 data: { label: '{{page.title}}' },
 position: { x: 20, y: {{loop.index0 * 50 + 50}} },
 parentId: '{{parent_index}}',
 },
-{% endfor %}
-{% endfor %}
+{% endfor -%}
+{% endfor -%}
 ];
 
-const initialEdges: Edge[] = [
-// { id: 'e1-2', source: '1', target: '2', animated: true },
-// { id: 'e1-3', source: '1', target: '3' },
-// { id: 'e2a-4a', source: '2a', target: '4a' },
-// { id: 'e3-4b', source: '3', target: '4b' },
-// { id: 'e4a-4b1', source: '4a', target: '4b1' },
-// { id: 'e4a-4b2', source: '4a', target: '4b2' },
-// { id: 'e4b1-4b2', source: '4b1', target: '4b2' },
-];
-
-const NestedFlow = () => {
-const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-const onConnect = useCallback((connection: Edge | Connection) => {
-setEdges((eds) => addEdge(connection, eds));
-}, []);
-
-return (
-<ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange} onEdgesChange={onEdgesChange} onConnect={onConnect}
-    className="react-flow-subflows-example" fitView proOptions={proOptions}>
-    <MiniMap />
-    <Controls />
-</ReactFlow>
-);
-};
+export default content;

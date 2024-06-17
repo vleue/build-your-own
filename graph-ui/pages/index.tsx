@@ -43,8 +43,20 @@ const NestedFlow = () => {
     }, []);
 
     return (
-        <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange} onEdgesChange={onEdgesChange} onConnect={onConnect}
-            className="react-flow-subflows-example" fitView proOptions={proOptions}>
+        <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            className="react-flow-subflows-example"
+            fitView
+            proOptions={proOptions}
+            edgesUpdatable={false}
+            edgesFocusable={false}
+            nodesConnectable={false}
+            nodesFocusable={false}
+        >
             <MiniMap />
             <Controls />
         </ReactFlow>

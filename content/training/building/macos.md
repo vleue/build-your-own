@@ -1,3 +1,4 @@
 +++
-title = "macos"
+title = "macOS"
+weight = 1
 +++

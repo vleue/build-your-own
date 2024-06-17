@@ -1,3 +1,4 @@
 +++
-title = "Wasm & WebGL2"
+title = "Wasm / WebGL2"
+weight = 6
 +++

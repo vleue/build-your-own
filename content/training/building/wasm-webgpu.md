@@ -1,3 +1,4 @@
 +++
-title = "Wasm & WebGPU"
+title = "Wasm / WebGPU"
+weight = 7
 +++

@@ -95,7 +95,7 @@ const NestedFlow = () => {
             nodesConnectable={false}
             nodesFocusable={false}
             nodeTypes={nodeTypes}
-            translateExtent={[[-500, -500], [1500, 1000]]}
+            translateExtent={[[-500, -500], [1800, 1000]]}
         >
             <MiniMap />
             <Controls />

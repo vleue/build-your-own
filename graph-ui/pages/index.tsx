@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import 'reactflow/dist/style.css';
 
@@ -6,6 +5,36 @@ const inter = Inter({ subsets: ["latin"] });
 
 const proOptions = { hideAttribution: true };
 
+import { useState, useEffect } from 'react';
+
+function getWindowDimensions() {
+    if (typeof window !== "undefined") {
+        const { innerWidth: width, innerHeight: height } = window;
+        return {
+            width,
+            height
+        };
+    }
+    return {
+        width: 0,
+        height: 0
+    };
+}
+
+function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+}
 
 
 export default function Home() {
@@ -30,9 +59,16 @@ import ReactFlow, {
     Connection,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-// import { content, dependencies } from "../generated/nodes";
 
 import generated from '../generated/nodes';
+
+import Page from '../components/page';
+import Section from '../components/section';
+
+const nodeTypes = {
+    page: Page,
+    section: Section,
+};
 
 const NestedFlow = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(generated.content);
@@ -42,6 +78,8 @@ const NestedFlow = () => {
         setEdges((eds) => addEdge(connection, eds));
     }, []);
 
+    const size = useWindowDimensions();
+
     return (
         <ReactFlow
             nodes={nodes}
@@ -50,12 +88,13 @@ const NestedFlow = () => {
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             className="react-flow-subflows-example"
-            fitView
+            defaultViewport={{ x: size.width / 3, y: size.height / 4, zoom: 1.5 }}
             proOptions={proOptions}
             edgesUpdatable={false}
             edgesFocusable={false}
             nodesConnectable={false}
             nodesFocusable={false}
+            nodeTypes={nodeTypes}
         >
             <MiniMap />
             <Controls />

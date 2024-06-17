@@ -4,23 +4,22 @@ const content: Node[] = [
 {% for subsection in section.subsections -%}
 {% set subsection = get_section(path=subsection) -%}
 {% set parent_index = loop.index -%}
-{% set container_height = subsection.pages | length * 50 -%}
 {
 id: '{{parent_index}}',
-data: { label: '{{subsection.title}}' },
-position: { x: {{loop.index0 * 250 + 50}}, y: 100 },
+data: { label: '{{subsection.title}}', children: {{ subsection.pages | length }} },
+position: { x: {{subsection.extra.pos[0]}}, y: {{subsection.extra.pos[1]}} },
 className: 'light',
-style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 200, height: {{ container_height + 50 }} },
 draggable: false,
+type: 'section',
 },
 {% for page in subsection.pages -%}
 {
 id: '{{parent_index}}-{{loop.index}}',
-data: { label: '{{page.title}}' },
+data: { label: '{{page.title | safe}}', path: '{{page.path | safe}}' },
 position: { x: 20, y: {{loop.index0 * 50 + 50}} },
-style: { width: 160 },
 parentId: '{{parent_index}}',
 draggable: false,
+type: 'page',
 },
 {% endfor -%}
 {% endfor -%}

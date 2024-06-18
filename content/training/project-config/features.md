@@ -4,5 +4,5 @@ weight = 1
 
 [extra]
 dependencies = ["/training/project-config/new-project/"]
-pos = [0, 1]
+pos = [1, 1]
 +++

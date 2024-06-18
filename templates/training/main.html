@@ -6,17 +6,29 @@ const content: Node[] = [
 {% set parent_index = loop.index -%}
 {
 id: '{{parent_index}}',
-data: { label: '{{subsection.title}}', children: {{ subsection.pages | length }} },
+{% if subsection.extra.size -%}
+data: { label: '{{subsection.title}}', children: {{ subsection.extra.size[1] }}, width : {{ subsection.extra.size[0] }}
+},
+{% else -%}
+data: { label: '{{subsection.title}}', children: {{ subsection.pages | length }}, width: 1 },
+{% endif -%}
 position: { x: {{subsection.extra.pos[0]}}, y: {{subsection.extra.pos[1]}} },
 className: 'light',
 draggable: false,
 type: 'section',
 },
 {% for page in subsection.pages -%}
+{% if page.extra.pos -%}
+{% set node_y = page.extra.pos[1] * 60 -%}
+{% set node_x = page.extra.pos[0] * 210 -%}
+{% else -%}
+{% set node_y = loop.index0 * 60 -%}
+{% set node_x = 0 -%}
+{% endif -%}
 {
 id: '{{parent_index}}-{{loop.index}}',
-data: { label: '{{page.title | safe}}', path: '{{page.path | safe}}' },
-position: { x: 20, y: {{loop.index0 * 50 + 50}} },
+data: { label: '{{page.title | safe}}', path: '{{page.path | safe}}', },
+position: { x: {{node_x + 20}}, y: {{node_y + 50}} },
 parentId: '{{parent_index}}',
 draggable: false,
 type: 'page',

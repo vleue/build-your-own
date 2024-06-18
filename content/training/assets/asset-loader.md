@@ -1,4 +1,4 @@
 +++
-title = "Custom Asset Loader"
-weight = 3
+title = "Asset Loader"
+weight = 5
 +++

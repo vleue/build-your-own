@@ -17,6 +17,7 @@ const config: Config = {
     },
   },
   safelist: [
+    "h-[180px]",
     "h-[240px]",
     "h-[300px]",
     "h-[360px]",
@@ -27,6 +28,7 @@ const config: Config = {
     "h-[660px]",
     "h-[720px]",
     "h-[780px]",
+    "h-[840px]",
     "w-[240px]",
     "w-[440px]",
   ],

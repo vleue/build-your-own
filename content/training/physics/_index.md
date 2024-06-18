@@ -1,7 +1,7 @@
 +++
-title = "Game AI"
+title = "Physics"
 sort_by = "weight"
 
 [extra]
-pos = [-700, 500]
+pos = [1500, 700]
 +++

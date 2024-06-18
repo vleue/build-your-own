@@ -3,5 +3,5 @@ title = "Game Logic"
 sort_by = "weight"
 
 [extra]
-pos = [-700, 200]
+pos = [-700, 100]
 +++

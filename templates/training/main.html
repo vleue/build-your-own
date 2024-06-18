@@ -5,7 +5,7 @@ const content: Node[] = [
 {% set subsection = get_section(path=subsection) -%}
 {% set parent_index = loop.index -%}
 {
-id: '{{parent_index}}',
+id: 's{{parent_index}}',
 {% if subsection.extra.size -%}
 data: { label: '{{subsection.title}}', children: {{ subsection.extra.size[1] }}, width : {{ subsection.extra.size[0] }}
 },
@@ -26,10 +26,10 @@ type: 'section',
 {% set node_x = 0 -%}
 {% endif -%}
 {
-id: '{{parent_index}}-{{loop.index}}',
+id: 's{{parent_index}}-p{{loop.index}}',
 data: { label: '{{page.title | safe}}', path: '{{page.path | safe}}', },
 position: { x: {{node_x + 20}}, y: {{node_y + 50}} },
-parentId: '{{parent_index}}',
+parentId: 's{{parent_index}}',
 draggable: false,
 type: 'page',
 },
@@ -42,24 +42,70 @@ const dependencies: Edge[] = [
 {% for subsection in section.subsections -%}
 {% set subsection = get_section(path=subsection) -%}
 {% set parent_index = loop.index -%}
+
+{% if subsection.extra.dependencies -%}
+{% for dependency in subsection.extra.dependencies -%}
+{% set section_id = "s" ~ parent_index -%}
+{% if dependency is iterable -%}
+{% set dependency = dependency[0] -%}
+{% set side = dependency[1] -%}
+{% else -%}
+{% set side = "bottom" -%}
+{% endif -%}
+{% set dependency_to_section = "training/" ~ dependency ~ "/_index.md" %}
+{% set dependency_to_page = "/training/" ~ dependency ~ "/" %}
+{% for subsection in section.subsections -%}
+{% set parent_index = loop.index -%}
+{% if dependency_to_section == subsection -%}
+{% set dependency_id = "s" ~parent_index -%}
+{ id: '{{section_id}}-{{dependency_id}}', target: '{{section_id}}', source: '{{dependency_id}}', sourceHandle:
+'{{side}}' },
+{% endif -%}
+{% set subsection = get_section(path=subsection) -%}
 {% for page in subsection.pages -%}
 {% set page_index = loop.index -%}
-{% set page_id = parent_index ~ "-" ~ page_index -%}
+{% if dependency_to_page == page.path -%}
+{% set dependency_id = "s" ~ parent_index ~ "-p" ~ page_index -%}
+{ id: '{{section_id}}-{{dependency_id}}', target: '{{section_id}}', source: '{{dependency_id}}', sourceHandle:
+'{{side}}' },
+{% endif -%}
+{% endfor -%}
+{% endfor -%}
+{% endfor -%}
+{% endif -%}
+
+{% for page in subsection.pages -%}
+{% set page_index = loop.index -%}
+{% set page_id = "s" ~ parent_index ~ "-p" ~ page_index -%}
 {% if page.extra.dependencies -%}
 {% for dependency in page.extra.dependencies -%}
+
+{% if dependency is iterable -%}
+{% set dependency = dependency[0] -%}
+{% set side = dependency[1] -%}
+{% else -%}
+{% set side = "bottom" -%}
+{% endif -%}
+{% set dependency_to_section = "training/" ~ dependency ~ "/_index.md" %}
+{% set dependency_to_page = "/training/" ~ dependency ~ "/" %}
 {% for subsection in section.subsections -%}
-{% set subsection = get_section(path=subsection) -%}
 {% set parent_index = loop.index -%}
+{% if dependency_to_section == subsection -%}
+{% set dependency_id = "s" ~parent_index -%}
+{ id: '{{page_id}}-{{dependency_id}}', target: '{{page_id}}', source: '{{dependency_id}}', sourceHandle: '{{side}}' },
+{% endif -%}
+{% set subsection = get_section(path=subsection) -%}
 {% for page in subsection.pages -%}
 {% set page_index = loop.index -%}
-{% if dependency == page.path -%}
-{% set dependency_id = parent_index ~ "-" ~ page_index -%}
-{ id: '{{page_id}}-{{dependency_id}}', target: '{{page_id}}', source: '{{dependency_id}}' },
+{% if dependency_to_page == page.path -%}
+{% set dependency_id = "s" ~ parent_index ~ "-p" ~ page_index -%}
+{ id: '{{page_id}}-{{dependency_id}}', target: '{{page_id}}', source: '{{dependency_id}}', sourceHandle: '{{side}}' },
 {% endif -%}
 {% endfor -%}
 {% endfor -%}
 {% endfor -%}
 {% endif -%}
+
 {% endfor -%}
 {% endfor -%}
 ];

@@ -1,4 +1,4 @@
 +++
-title = "Adding Plugins"
+title = "Plugins"
 weight = 2
 +++

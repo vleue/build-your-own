@@ -3,5 +3,5 @@ title = "Physics"
 sort_by = "weight"
 
 [extra]
-pos = [1500, 700]
+pos = [1200, 800]
 +++

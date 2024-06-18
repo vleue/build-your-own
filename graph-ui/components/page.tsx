@@ -11,7 +11,9 @@ function Page({ data }: any) {
                     </div>
                 </div>
                 <Handle type="target" position={Position.Top} className="w-16 bg-transparent border-0 pointer-events-auto cursor-auto" />
-                <Handle type="source" position={Position.Bottom} className="w-16 bg-transparent border-0 pointer-events-auto cursor-auto" />
+                <Handle type="source" position={Position.Bottom} className="w-16 bg-transparent border-0 pointer-events-auto cursor-auto" id="bottom" />
+                <Handle type="source" position={Position.Left} className="w-16 bg-transparent border-0 pointer-events-auto cursor-auto" id="left" />
+                <Handle type="source" position={Position.Right} className="w-16 bg-transparent border-0 pointer-events-auto cursor-auto" id="right" />
             </div>
         </a>
     );

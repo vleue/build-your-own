@@ -3,5 +3,5 @@ title = "Lighting"
 sort_by = "weight"
 
 [extra]
-pos = [1500, 0]
+pos = [1500, -100]
 +++

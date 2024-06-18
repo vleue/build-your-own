@@ -3,6 +3,6 @@ title = "Build for Release"
 weight = 3
 
 [extra]
-dependencies = ["/training/project-config/features/"]
+dependencies = ["project-config/features"]
 pos = [1, 2]
 +++

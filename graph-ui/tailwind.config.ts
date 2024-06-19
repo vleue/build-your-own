@@ -29,6 +29,7 @@ const config: Config = {
     "h-[720px]",
     "h-[780px]",
     "h-[840px]",
+    "h-[900px]",
     "w-[240px]",
     "w-[440px]",
   ],

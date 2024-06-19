@@ -40,6 +40,7 @@ function useWindowDimensions() {
 export default function Home() {
     return (
         < div style={{ height: '100vh', width: '100vw' }}>
+            <Header />
             <NestedFlow />
         </div>
     );
@@ -64,11 +65,36 @@ import generated from '../generated/nodes';
 
 import Page from '../components/page';
 import Section from '../components/section';
+import Head from "next/head";
 
 const nodeTypes = {
     page: Page,
     section: Section,
 };
+
+function Header() {
+    useEffect(() => {
+        document.body.classList.add("home");
+        document.body.classList.add("dark");
+    });
+    return (
+        <div>
+            <Head>
+                <title>ByoBG</title>
+                <link rel="preload" as="font" href="/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" />
+                <link rel="preload" as="font" href="/fonts/vendor/jost/jost-v4-latin-700.woff2" type="font/woff2" />
+                <link rel="stylesheet" href="/main.css" />
+            </Head>
+            <div className="header-bar fixed-top"></div>
+            <header className="navbar fixed-top navbar-expand-md navbar-light">
+                <div className="container ">
+                    <a className="navbar-brand order-1 order-md-0 me-auto" href="/">ByoBG</a>
+                </div>
+                <div id="mode" className="order-2 order-md-4"></div>
+            </header>
+        </ div >
+    );
+}
 
 const NestedFlow = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(generated.content);
@@ -87,7 +113,7 @@ const NestedFlow = () => {
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
-            className="react-flow-subflows-example"
+            className="bevy-graph"
             defaultViewport={{ x: size.width / 3, y: size.height / 4, zoom: 1.5 }}
             proOptions={proOptions}
             edgesUpdatable={false}

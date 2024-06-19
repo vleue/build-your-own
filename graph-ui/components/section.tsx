@@ -11,7 +11,7 @@ function Section({ data }: any) {
         <div className={section_class}>
             <div className="flex">
                 <div className="ml-2">
-                    <div className="text-md font-bold text-gray-300">{data.label}</div>
+                    <div className="text-md font-bold text-blue-300">{data.label}</div>
                 </div>
             </div>
             <Handle type="target" position={Position.Top} className="w-16 bg-transparent border-0 pointer-events-auto cursor-auto" />

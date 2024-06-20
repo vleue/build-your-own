@@ -16,15 +16,27 @@ url = "/training"
 weight = 10
 
 [[extra.list]]
-title = "Choose your path"
-content = 'Start from the basis, find out how to continue and dig further.'
+title = "Choose your own path"
+content = "Start from the basics and navigate through the graph to explore Bevy's features."
 
 [[extra.list]]
-title = "Decide where to start"
-content = "Decide what you want to do with Bevy, and find out what you'll need to learn first."
+title = "Set your goals"
+content = "Decide what you want to achieve with Bevy, and explore the learning path to get there."
 
 [[extra.list]]
-title = "Premade paths"
-content = "Follow premade paths that will guide you to your objectives."
+title = "Follow guided tours"
+content = "Take a structured approach to learning Bevy's features with curated guides."
+
+[[extra.list]]
+title = "Explore connections"
+content = "Discover how different concepts relate to each other and uncover new ways to use Bevy."
+
+[[extra.list]]
+title = "Support us"
+content = '<a href="https://bevyengine.org/donate/">Support the Bevy foundation</a>!'
+
+[[extra.list]]
+title = "Open to contributions"
+content = "Do you want to edit or update nodes? Create new paths? Your contributions are welcomed!"
 
 +++

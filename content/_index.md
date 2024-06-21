@@ -10,14 +10,14 @@ url_button = "Get started"
 
 # Menu items
 [[extra.menu.main]]
-name = "The Graph"
-section = "graph"
+name = "The Forge"
+section = "forge"
 url = "/training"
 weight = 10
 
 [[extra.list]]
 title = "Choose your own path"
-content = "Start from the basics and navigate through the graph to explore Bevy's features."
+content = "Start from the basics and navigate through the forge, a graph of Bevy's features and their connections."
 
 [[extra.list]]
 title = "Set your goals"
@@ -25,7 +25,7 @@ content = "Decide what you want to achieve with Bevy, and explore the learning p
 
 [[extra.list]]
 title = "Follow guided tours"
-content = "Take a structured approach to learning Bevy's features with curated guides."
+content = "Take a structured approach to learning Bevy's features with curated guides, selected paths through the forge with an end project."
 
 [[extra.list]]
 title = "Explore connections"
